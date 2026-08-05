@@ -34,6 +34,7 @@ export default function UploadComponent({ onUpload }) {
         <input
           type="file"
           name="file"
+          disabled={isSubmitting}
           onChange={(event) => setSelectedFile(event.target.files?.[0] || null)}
         />
         <button type="submit" disabled={isSubmitting}>

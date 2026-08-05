@@ -13,10 +13,12 @@ function formatBytes(size) {
 }
 
 export default function DocumentList({ documents, onDownload }) {
+  const hasDocuments = documents.length > 0;
+
   return (
     <section>
       <h2>Documentos</h2>
-      {documents.length === 0 ? (
+      {!hasDocuments ? (
         <p>Nenhum documento enviado para este usuário.</p>
       ) : (
         <ul>
@@ -24,7 +26,7 @@ export default function DocumentList({ documents, onDownload }) {
             <li key={document.id}>
               <strong>{document.originalName}</strong>
               {' - '}
-              {formatBytes(document.size)}
+              {formatBytes(document.size || 0)}
               {' - '}
               {new Date(document.uploadedAt).toLocaleString('pt-BR')}
               {' '}

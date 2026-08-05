@@ -4,6 +4,10 @@ export default function DownloadButton({ document, onDownload }) {
   const [isDownloading, setIsDownloading] = useState(false);
 
   async function handleDownload() {
+    if (!document?.id) {
+      return;
+    }
+
     setIsDownloading(true);
 
     try {

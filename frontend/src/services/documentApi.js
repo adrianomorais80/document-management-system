@@ -1,16 +1,28 @@
 const USER_HEADER = 'x-user-id';
 
-function ensureSuccess(response, fallbackMessage) {
+function createUserHeaders(userId) {
+  return {
+    [USER_HEADER]: userId,
+  };
+}
+
+async function ensureSuccess(response, fallbackMessage) {
   if (response.ok) {
     return response;
   }
 
-  return response.json().then((body) => {
-    const errorMessage = body?.error || fallbackMessage;
-    throw new Error(errorMessage);
-  }).catch(() => {
-    throw new Error(fallbackMessage);
-  });
+  let message = fallbackMessage;
+
+  try {
+    const body = await response.json();
+    if (body?.error) {
+      message = body.error;
+    }
+  } catch {
+    message = fallbackMessage;
+  }
+
+  throw new Error(message);
 }
 
 export async function uploadDocument({ file, userId }) {
@@ -19,9 +31,7 @@ export async function uploadDocument({ file, userId }) {
 
   const response = await fetch('/api/upload', {
     method: 'POST',
-    headers: {
-      [USER_HEADER]: userId,
-    },
+    headers: createUserHeaders(userId),
     body: formData,
   });
 
@@ -31,9 +41,7 @@ export async function uploadDocument({ file, userId }) {
 
 export async function listDocuments({ userId }) {
   const response = await fetch('/api/documents', {
-    headers: {
-      [USER_HEADER]: userId,
-    },
+    headers: createUserHeaders(userId),
   });
 
   await ensureSuccess(response, 'Falha ao listar documentos.');
@@ -42,9 +50,7 @@ export async function listDocuments({ userId }) {
 
 export async function downloadDocument({ id, userId, filename }) {
   const response = await fetch(`/api/documents/${id}/download`, {
-    headers: {
-      [USER_HEADER]: userId,
-    },
+    headers: createUserHeaders(userId),
   });
 
   await ensureSuccess(response, 'Falha ao baixar documento.');
