@@ -1,63 +1,35 @@
-# Document Management System com GitHub Copilot
+<div align="center">
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
+# 🎉 Congratulations Copilot! 🎉
 
-Hey adrianomorais80!
+<img src="https://octodex.github.com/images/welcometocat.png" height="200px" />
 
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
+### 🌟 You've successfully completed the exercise! 🌟
 
-Remember, it's self-paced so feel free to take a break! ☕️
+## 🚀 Share Your Success!
 
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/adrianomorais80/document-management-system/issues/1)
+**Show off your new skills and inspire others!**
 
-## Checklist Operacional (Resumo da Spec)
+<a href="https://twitter.com/intent/tweet?text=I%20just%20completed%20the%20%22Document%20Management%20System%20com%20GitHub%20Copilot%22%20GitHub%20Skills%20hands-on%20exercise!%20%F0%9F%8E%89%0A%0Ahttps%3A%2F%2Fgithub.com%2Fadrianomorais80%2Fdocument-management-system%0A%0A%23GitHubSkills%20%23OpenSource%20%23GitHubLearn" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Share%20on%20X-1da1f2?style=for-the-badge&logo=x&logoColor=white" alt="Share on X" />
+</a>
+<a href="https://bsky.app/intent/compose?text=I%20just%20completed%20the%20%22Document%20Management%20System%20com%20GitHub%20Copilot%22%20GitHub%20Skills%20hands-on%20exercise!%20%F0%9F%8E%89%0A%0Ahttps%3A%2F%2Fgithub.com%2Fadrianomorais80%2Fdocument-management-system%0A%0A%23GitHubSkills%20%23OpenSource%20%23GitHubLearn" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Share%20on%20Bluesky-0085ff?style=for-the-badge&logo=bluesky&logoColor=white" alt="Share on Bluesky" />
+</a>
+<a href="https://www.linkedin.com/feed/?shareActive=true&text=I%20just%20completed%20the%20%22Document%20Management%20System%20com%20GitHub%20Copilot%22%20GitHub%20Skills%20hands-on%20exercise!%20%F0%9F%8E%89%0A%0Ahttps%3A%2F%2Fgithub.com%2Fadrianomorais80%2Fdocument-management-system%0A%0A%23GitHubSkills%20%23OpenSource%20%23GitHubLearn" target="_blank" rel="noopener noreferrer">
+  <img src="https://img.shields.io/badge/Share%20on%20LinkedIn-0077b5?style=for-the-badge&logo=linkedin&logoColor=white" alt="Share on LinkedIn" />
+</a>
 
-### 1) Preparação do ambiente
+### 🎯 What's Next?
 
-- [ ] Instalar dependências do backend (`cd backend && npm install`).
-- [ ] Instalar dependências do frontend (`cd frontend && npm install`).
-- [ ] Confirmar Node compatível com o projeto.
+**Keep the momentum going!**
 
-### 2) Configuração
+[![](https://img.shields.io/badge/Return%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/adrianomorais80/document-management-system/issues/1)
+[![GitHub Skills](https://img.shields.io/badge/Explore%20GitHub%20Skills-000000?style=for-the-badge&logo=github&logoColor=white)](https://learn.github.com/skills)
 
-- [ ] Definir `PORT` para o backend (padrão: `3000`).
-- [ ] Definir `MAX_FILE_SIZE_BYTES` quando necessário (padrão: `10485760` = 10 MB).
-- [ ] Confirmar diretório de armazenamento local em `backend/storage`.
+*There's no better way to learn than building things!* 🚀
 
-### 3) Backend (Clean Architecture simples)
-
-- [ ] Validar separação em camadas: `routes -> controllers -> services -> repositories`.
-- [ ] Garantir upload local com `multer.diskStorage`.
-- [ ] Garantir metadados em memória (sem banco de dados nesta fase).
-
-### 4) Contratos de API
-
-- [ ] `GET /health` retorna `200` com `{ "status": "ok" }`.
-- [ ] `POST /upload` exige `x-user-id` e arquivo `file` (multipart/form-data).
-- [ ] `GET /documents` lista apenas documentos do usuário em `x-user-id`.
-- [ ] `GET /documents/:id/download` permite download apenas para o dono do documento.
-
-### 5) Regras de erro esperadas
-
-- [ ] `400` para ausência de `x-user-id`.
-- [ ] `400` para upload sem arquivo.
-- [ ] `403` para tentativa de download sem permissão.
-- [ ] `404` para documento inexistente.
-- [ ] `413` para arquivo acima do limite configurado.
-- [ ] `500` para falhas internas não tratadas.
-
-### 6) Frontend
-
-- [ ] Consumir backend via prefixo `/api` (proxy do Vite).
-- [ ] Implementar fluxo de upload com feedback de sucesso/erro.
-- [ ] Implementar listagem por usuário.
-- [ ] Implementar ação de download por documento.
-
-### 7) Validação final
-
-- [ ] Executar testes do backend (`cd backend && npm test`).
-- [ ] Executar build do frontend (`cd frontend && npm run build`).
-- [ ] Validar manualmente fluxo completo: upload -> listagem -> download.
+</div>
 
 ---
 
