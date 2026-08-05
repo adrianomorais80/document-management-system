@@ -39,9 +39,10 @@ export async function uploadDocument({ file, userId }) {
   return response.json();
 }
 
-export async function listDocuments({ userId }) {
+export async function listDocuments({ userId, signal }) {
   const response = await fetch('/api/documents', {
     headers: createUserHeaders(userId),
+    signal,
   });
 
   await ensureSuccess(response, 'Falha ao listar documentos.');
@@ -63,5 +64,7 @@ export async function downloadDocument({ id, userId, filename }) {
   document.body.appendChild(anchor);
   anchor.click();
   anchor.remove();
-  URL.revokeObjectURL(url);
+  setTimeout(() => {
+    URL.revokeObjectURL(url);
+  }, 1000);
 }

@@ -150,3 +150,22 @@ test('GET /documents/:id/download retorna 403 para usuário sem permissão', asy
   assert.strictEqual(response.status, 403);
   assert.strictEqual(body.error, 'Você não tem permissão para acessar este documento.');
 });
+
+test('GET /documents/:id/download retorna 404 quando arquivo foi removido do disco', async () => {
+  const uploadResponse = await uploadDocument({ owner: 'user-1', content: 'arquivo-temporario' });
+  const uploadBody = await uploadResponse.json();
+
+  const savedDocument = documentRepository.findById(uploadBody.id);
+  fs.unlinkSync(savedDocument.storagePath);
+
+  const response = await fetch(`${baseUrl}/documents/${uploadBody.id}/download`, {
+    headers: {
+      'x-user-id': 'user-1',
+    },
+  });
+
+  const body = await response.json();
+
+  assert.strictEqual(response.status, 404);
+  assert.strictEqual(body.error, 'Arquivo do documento não encontrado no armazenamento local.');
+});

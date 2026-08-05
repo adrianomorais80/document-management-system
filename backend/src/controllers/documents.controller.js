@@ -1,3 +1,5 @@
+const { NotFoundError } = require('../services/errors');
+
 class DocumentsController {
   constructor(documentsService) {
     this.documentsService = documentsService;
@@ -38,7 +40,17 @@ class DocumentsController {
       const document = this.documentsService.getDocumentForDownload({ id, owner });
 
       res.setHeader('Content-Type', document.mimeType || 'application/octet-stream');
-      return res.download(document.storagePath, document.originalName);
+      return res.download(document.storagePath, document.originalName, (error) => {
+        if (!error) {
+          return;
+        }
+
+        if (error.code === 'ENOENT') {
+          return next(new NotFoundError('Arquivo do documento não encontrado no armazenamento local.'));
+        }
+
+        return next(error);
+      });
     } catch (error) {
       return next(error);
     }

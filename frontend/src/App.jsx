@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import UploadComponent from './components/UploadComponent';
 import DocumentList from './components/DocumentList';
 import {
@@ -15,18 +15,31 @@ export default function App() {
   const [documents, setDocuments] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
   const [errorMessage, setErrorMessage] = useState('');
+  const activeRequestRef = useRef(null);
 
   const loadDocuments = useCallback(async (owner) => {
+    if (activeRequestRef.current) {
+      activeRequestRef.current.abort();
+    }
+
+    const controller = new AbortController();
+    activeRequestRef.current = controller;
+
     setIsLoading(true);
     setErrorMessage('');
 
     try {
-      const data = await listDocuments({ userId: owner });
+      const data = await listDocuments({ userId: owner, signal: controller.signal });
       setDocuments(data);
     } catch (error) {
-      setErrorMessage(error.message || 'Nao foi possivel carregar documentos.');
+      if (error.name !== 'AbortError') {
+        setErrorMessage(error.message || 'Nao foi possivel carregar documentos.');
+      }
     } finally {
-      setIsLoading(false);
+      if (activeRequestRef.current === controller) {
+        setIsLoading(false);
+        activeRequestRef.current = null;
+      }
     }
   }, []);
 
