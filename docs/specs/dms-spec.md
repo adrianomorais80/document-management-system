@@ -80,11 +80,11 @@ Resposta de sucesso:
 
 ```json
 {
-	"id": "0f6d8fef-8a1d-4bd4-9386-5797984e4c62",
-	"originalName": "arquivo.pdf",
-	"size": 12345,
-	"uploadedAt": "2026-08-05T15:00:00.000Z",
-	"owner": "user-demo"
+  "id": "0f6d8fef-8a1d-4bd4-9386-5797984e4c62",
+  "originalName": "arquivo.pdf",
+  "size": 12345,
+  "uploadedAt": "2026-08-05T15:00:00.000Z",
+  "owner": "user-demo"
 }
 ```
 
@@ -105,13 +105,13 @@ Resposta de sucesso:
 
 ```json
 [
-	{
-		"id": "0f6d8fef-8a1d-4bd4-9386-5797984e4c62",
-		"originalName": "arquivo.pdf",
-		"size": 12345,
-		"uploadedAt": "2026-08-05T15:00:00.000Z",
-		"owner": "user-demo"
-	}
+  {
+    "id": "0f6d8fef-8a1d-4bd4-9386-5797984e4c62",
+    "originalName": "arquivo.pdf",
+    "size": 12345,
+    "uploadedAt": "2026-08-05T15:00:00.000Z",
+    "owner": "user-demo"
+  }
 ]
 ```
 
@@ -129,8 +129,8 @@ Resposta de sucesso:
 - Status: `200`
 - Body: arquivo binário
 - Headers esperados:
-	- `Content-Type`: MIME do arquivo
-	- `Content-Disposition`: attachment com nome original
+  - `Content-Type`: MIME do arquivo
+  - `Content-Disposition`: attachment com nome original
 
 Respostas de erro:
 - `400` com `{ "error": "Header x-user-id é obrigatório." }`
@@ -149,17 +149,17 @@ Resposta de sucesso:
 
 ```json
 {
-	"status": "ok"
+  "status": "ok"
 }
 ```
 
 ## 7. Decisões arquiteturais
 
 - Backend estruturado em camadas:
-	- `routes`: configuração de endpoints e middleware de upload.
-	- `controllers`: adaptação HTTP (headers, params, responses).
-	- `services`: regras de negócio e autorização.
-	- `repositories`: persistência de metadados em memória.
+  - `routes`: configuração de endpoints e middleware de upload.
+  - `controllers`: adaptação HTTP (headers, params, responses).
+  - `services`: regras de negócio e autorização.
+  - `repositories`: persistência de metadados em memória.
 - Armazenamento local obrigatório usando `multer.diskStorage` em `backend/storage`.
 - Nome de arquivo armazenado com sanitização simples e prefixo de timestamp.
 - Frontend React por componentes com serviço dedicado de API (`fetch` + `/api`).
